@@ -19,6 +19,8 @@ class Site(models.Model):
     description = models.TextField()
     record_capicity = models.IntegerField(choices=RECORD_CAPACITY_CHOICES)
 
+    def __str__(self):
+            return self.name
 
 # you can choose to reuse the User model from django.contrib.auth.models
 class UserRecords(models.Model):
@@ -33,3 +35,6 @@ class UserRecords(models.Model):
     pincode = models.CharField(max_length=10)
     dob = models.DateField
     is_active = models.BooleanField(default=True)  # do not count for active records if false
+
+    def __str__(self):
+        return self.name

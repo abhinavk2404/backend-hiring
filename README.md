@@ -1,16 +1,29 @@
-# What is this about?
+## What This Is About
 
-there is a list of customers in the Site table. Each customer has a unique id and a name. Our servers are shared across all customers. Since resources are shared amongst all customers, we need to dynamically handle their asynchronous tasks. We need to create a system to handle the following tasks:
+This project implements a **dynamic asynchronous task execution system** designed for a **multi-tenant environment** where resources are shared across different customers. The goal is to efficiently manage and execute tasks (referred to as **jobs**) submitted by customers based on their type and the nature of the job.
 
-1. create a datastructure/store to store type of job based on their execution time. you can assume time in seconds and there are 5 types of jobs.
-2. create a datastructure/store to store type of customer based on their record volume. large volume customers will tend to comsume more resources. you can assume there are 3 types of customers.
-3. create relevant apis to support the interactions.
-4. create workers which will pick up the job based on the customer type and job type and execute them. you can assume that each worker can execute only one job at a time.
+### Key Concepts
 
-refer website/models.py for Site Table <br>
-refer website/tasks.py for the tasks to be executed
+- **Multi-Tenant Architecture**:  
+  Customers (stored in the `Site` table) share infrastructure, so tasks need to be handled with resource prioritization in mind.
 
-you can use any database, message queue, etc. to store the data. you can use any library to create the workers or any other part of the system. you can create any number of files, classes, functions, etc. to complete the assignment.
+- **Job Classification**:  
+  Jobs are categorized into **five types** based on their execution time (in seconds), allowing the system to prioritize or balance loads accordingly.
+
+- **Customer Classification**:  
+  Customers are grouped into **three types** based on the volume of data they generate. This impacts how resource-intensive their jobs may be.
+
+- **Task Execution**:  
+  Workers are designed to pick up and execute jobs by considering both the **customer type** and **job type**.  
+  Each worker executes **only one job at a time**, ensuring simplicity and predictable behavior.
+
+### System Features
+
+- 📦 Data structures to store and manage job types and customer types  
+- 📡 RESTful APIs to interact with the system (e.g., submit tasks, check status)  
+- ⚙️ Background workers that continuously fetch and execute jobs based on defined rules and priorities  
+- 🔄 Flexible integration with databases, message queues, and libraries to handle queuing and execution
+
 
 # Setup:
 
@@ -22,31 +35,6 @@ $ pip install --upgrade pip --trusted-host pypi.python.org
 $ pip3 install -r requirements.txt
 ```
 
-# How to submit the assignment:
+---
 
-1. Fork this repository
-2. Create a new branch with your name
-3. Commit your code to this branch
-4. Create a pull request to this repository
-5. Add your name and email to the README.md file
-
-# What will be evaluated?
-
-1. Code quality
-2. high level design
-3. api design
-
-# Bonus:
-
-create a deployment pipeline to deploy on a ubuntu VM. you can use any CI/CD tool for the same. <br>
-or <br>
-deploy on your own cloud provider and share the link with us.
-
-# What next?
-
-Once you have submitted the assignment, we will review your code and if it meets our requirements, we will get back to you within a week and schedule 1st round of interview. <br>
-in the 1st round of interview, we will discuss the code and build few additional features.
-
-### <i>Name</i>: Rajeev K L
-### <i>Email</i>: rajeev@almabase.com
-### <i>JD</i>: [Software Engineer](https://www.almabase.com/careers?ashby_jid=27df3851-fcea-47e2-af51-4c5aec17ff67)
+This project simulates a real-world asynchronous job processing system as seen in scalable SaaS platforms—prioritizing **fairness**, **efficiency**, and **maintainability**.
